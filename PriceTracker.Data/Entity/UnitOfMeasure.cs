@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using PriceTracker.Data.UnitOfMeasure;
 
 namespace PriceTracker.Data.Entity;
 
@@ -32,5 +33,18 @@ internal class UnitOfMeasureConfiguration : IEntityTypeConfiguration<UnitOfMeasu
 
         builder.Property(p => p.ConversionToGramsRatio)
             .HasColumnType("decimal(9,5)");
+    }
+}
+
+internal static class UnitOfMeasureExtensions
+{
+    public static UnitOfMeasureModel AsModel(this UnitOfMeasure entity)
+    {
+        return entity == null ? null : new UnitOfMeasureModel()
+        {
+            Name = entity.Name,
+            Abbreviation = entity.Abbreviation,
+            ConversionToGramsRatio = entity.ConversionToGramsRatio
+        };
     }
 }
