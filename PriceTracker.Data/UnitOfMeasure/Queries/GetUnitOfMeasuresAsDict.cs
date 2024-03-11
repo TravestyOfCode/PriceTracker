@@ -40,7 +40,7 @@ internal class GetUnitOfMeasuresAsDictHandler : IRequestHandler<GetUnitOfMeasure
         {
             _logger.LogError(ex, "Unexpected error.");
 
-            return Result.ServerError<Dictionary<int, string>>();
+            return Result.ServerError<Dictionary<int, UnitOfMeasureModel>>();
         }
     }
 }
