@@ -11,7 +11,7 @@ using PriceTracker.Data;
 
 namespace PriceTracker.Data.Migrations
 {
-    [DbContext(typeof(AppDBContext))]
+    [DbContext(typeof(ApplicationDBContext))]
     [Migration("20240311122812_Initial-Migration")]
     partial class InitialMigration
     {
