@@ -24,6 +24,12 @@ public static class Services
             .AddEntityFrameworkStores<AppDBContext>()
             .AddDefaultTokenProviders();
 
+        // Add MediatR configuration
+        builder.Services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssembly(System.Reflection.Assembly.GetExecutingAssembly());
+        });
+
         return builder;
     }
 }
