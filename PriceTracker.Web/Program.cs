@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PriceTracker.Data;
 
 namespace PriceTracker.Web;
 
@@ -13,6 +14,8 @@ public class Program
         // Add services to the container.
         builder.Services.AddControllersWithViews();
 
+        builder.AddDataServices();
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -24,6 +27,7 @@ public class Program
         }
 
         app.UseHttpsRedirection();
+
         app.UseStaticFiles();
 
         app.UseRouting();
