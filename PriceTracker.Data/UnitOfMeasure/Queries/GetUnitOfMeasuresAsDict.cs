@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace PriceTracker.Data.UnitOfMeasure.Queries;
 
-public class GetUnitOfMeasuresAsDict : IRequest<Result<Dictionary<int, string>>>
+public class GetUnitOfMeasuresAsDict : IRequest<Result<Dictionary<int, UnitOfMeasureModel>>>
 {
 
 }
 
-internal class GetUnitOfMeasuresAsDictHandler : IRequestHandler<GetUnitOfMeasuresAsDict, Result<Dictionary<int, string>>>
+internal class GetUnitOfMeasuresAsDictHandler : IRequestHandler<GetUnitOfMeasuresAsDict, Result<Dictionary<int, UnitOfMeasureModel>>>
 {
     private readonly ApplicationDBContext _dbContext;
 
@@ -20,11 +20,19 @@ internal class GetUnitOfMeasuresAsDictHandler : IRequestHandler<GetUnitOfMeasure
         _logger = logger;
     }
 
-    public async Task<Result<Dictionary<int, string>>> Handle(GetUnitOfMeasuresAsDict request, CancellationToken cancellationToken)
+    public async Task<Result<Dictionary<int, UnitOfMeasureModel>>> Handle(GetUnitOfMeasuresAsDict request, CancellationToken cancellationToken)
     {
         try
         {
-            var entities = await _dbContext.UnitOfMeasures.ToDictionaryAsync(p => p.Id, p => p.Name, cancellationToken);
+            var entities = await _dbContext.UnitOfMeasures
+                .ToDictionaryAsync(p => p.Id,
+                                   p => new UnitOfMeasureModel()
+                                   {
+                                       Id = p.Id,
+                                       Name = p.Name,
+                                       Abbreviation = p.Abbreviation,
+                                       ConversionToGramsRatio = p.ConversionToGramsRatio
+                                   }, cancellationToken);
 
             return Result.Ok(entities);
         }
