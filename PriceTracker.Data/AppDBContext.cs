@@ -2,12 +2,15 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using PriceTracker.Data.Entity;
 using System.IO;
 
 namespace PriceTracker.Data;
 
 internal class AppDBContext : IdentityDbContext<AppUser>
 {
+    public DbSet<UnitOfMeasure> UnitOfMeasures { get; set; }
+
     public AppDBContext(DbContextOptions options) : base(options)
     {
     }
