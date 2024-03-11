@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
+using System.Linq;
 using System.Net;
 
 namespace PriceTracker.Data.Results;
@@ -17,10 +19,20 @@ public class Result : IResult
         get => WasSuccess ? _Value : throw new InvalidOperationException();
     }
 
+    public ModelStateDictionary Errors { get; internal set; }
+
+    public bool HasErrors => Errors.Any();
+
     public Result(HttpStatusCode statusCode, object value = default)
     {
         StatusCode = statusCode;
         _Value = value;
+        Errors = new ModelStateDictionary();
+    }
+
+    public void AddError(string propertyName, string errorMessage)
+    {
+        Errors.TryAddModelError(propertyName, errorMessage);
     }
 
     public static Result Ok() => new(HttpStatusCode.OK, null);

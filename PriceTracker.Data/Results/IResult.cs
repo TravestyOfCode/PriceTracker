@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Net;
 
 namespace PriceTracker.Data.Results;
 
@@ -11,4 +12,10 @@ public interface IResult
     public bool WasFailure { get; }
 
     public object Value { get; }
+
+    public bool HasErrors { get; }
+
+    public ModelStateDictionary Errors { get; }
+
+    public void AddError(string propertyName, string errorMessage);
 }
