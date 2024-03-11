@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PriceTracker.Data.UnitOfMeasure.Behaviors;
 
 namespace PriceTracker.Data;
 
@@ -28,6 +28,9 @@ public static class Services
         builder.Services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssembly(System.Reflection.Assembly.GetExecutingAssembly());
+
+            // Add behaviors
+            config.AddUnitOfMeasureBehaviors();
         });
 
         return builder;
