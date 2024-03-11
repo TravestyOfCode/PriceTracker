@@ -2,16 +2,15 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using PriceTracker.Data.Entity;
 using System.IO;
 
 namespace PriceTracker.Data;
 
-internal class AppDBContext : IdentityDbContext<AppUser>
+internal class ApplicationDBContext : IdentityDbContext<ApplicationUser>
 {
-    public DbSet<UnitOfMeasure> UnitOfMeasures { get; set; }
+    public DbSet<Entity.UnitOfMeasure> UnitOfMeasures { get; set; }
 
-    public AppDBContext(DbContextOptions options) : base(options)
+    public ApplicationDBContext(DbContextOptions options) : base(options)
     {
     }
 
@@ -23,9 +22,9 @@ internal class AppDBContext : IdentityDbContext<AppUser>
     }
 }
 
-internal class AppDbContextFactory : IDesignTimeDbContextFactory<AppDBContext>
+internal class AppDbContextFactory : IDesignTimeDbContextFactory<ApplicationDBContext>
 {
-    public AppDBContext CreateDbContext(string[] args)
+    public ApplicationDBContext CreateDbContext(string[] args)
     {
         // Create a configuration builder
         var config = new ConfigurationBuilder()
@@ -34,10 +33,10 @@ internal class AppDbContextFactory : IDesignTimeDbContextFactory<AppDBContext>
             .Build();
 
         // Configure our Db
-        var builder = new DbContextOptionsBuilder<AppDBContext>();
+        var builder = new DbContextOptionsBuilder<ApplicationDBContext>();
         builder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
 
         // Return Db with options
-        return new AppDBContext(builder.Options);
+        return new ApplicationDBContext(builder.Options);
     }
 }

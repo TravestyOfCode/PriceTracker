@@ -2,7 +2,7 @@
 
 namespace PriceTracker.Data;
 
-internal class AppUser : IdentityUser
+internal class ApplicationUser : IdentityUser
 {
 
 }

@@ -10,18 +10,18 @@ public static class Services
 {
     public static WebApplicationBuilder AddDataServices(this WebApplicationBuilder builder, string connectionName = "DefaultConnection")
     {
-        _ = builder.Services.AddDbContext<AppDBContext>(config =>
+        _ = builder.Services.AddDbContext<ApplicationDBContext>(config =>
         {
             config.UseSqlServer(builder.Configuration.GetConnectionString(connectionName));
             config.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTrackingWithIdentityResolution);
         })
-            .AddIdentity<AppUser, IdentityRole>(config =>
+            .AddIdentity<ApplicationUser, IdentityRole>(config =>
             {
                 config.SignIn.RequireConfirmedEmail = true;
                 config.Password.RequiredLength = 8;
                 config.User.RequireUniqueEmail = true;
             })
-            .AddEntityFrameworkStores<AppDBContext>()
+            .AddEntityFrameworkStores<ApplicationDBContext>()
             .AddDefaultTokenProviders();
 
         // Add MediatR configuration

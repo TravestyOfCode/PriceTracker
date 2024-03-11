@@ -10,7 +10,7 @@ using PriceTracker.Data;
 
 namespace PriceTracker.Data.Migrations
 {
-    [DbContext(typeof(AppDBContext))]
+    [DbContext(typeof(ApplicationDBContext))]
     partial class AppDBContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
