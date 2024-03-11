@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PriceTracker.Data.UnitOfMeasure;
+using System.Linq;
 
 namespace PriceTracker.Data.Entity;
 
@@ -46,5 +46,16 @@ internal static class UnitOfMeasureExtensions
             Abbreviation = entity.Abbreviation,
             ConversionToGramsRatio = entity.ConversionToGramsRatio
         };
+    }
+
+    public static IQueryable<UnitOfMeasureModel> ProjectToModel(this IQueryable<UnitOfMeasure> query)
+    {
+        return query?.Select(p => new UnitOfMeasureModel()
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Abbreviation = p.Abbreviation,
+            ConversionToGramsRatio = p.ConversionToGramsRatio
+        });
     }
 }
