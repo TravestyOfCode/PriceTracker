@@ -10,4 +10,8 @@
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PriceTracker.Data\PriceTracker.Data.csproj" />
+  </ItemGroup>
+
 </Project>
