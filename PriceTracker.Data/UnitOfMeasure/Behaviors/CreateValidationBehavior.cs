@@ -1,4 +1,5 @@
-﻿using PriceTracker.Data.Results;
+﻿using Microsoft.IdentityModel.Tokens;
+using PriceTracker.Data.Results;
 using PriceTracker.Data.UnitOfMeasure.Commands;
 
 namespace PriceTracker.Data.UnitOfMeasure.Behaviors;
@@ -21,6 +22,17 @@ internal class CreateValidationBehavior : IPipelineBehavior<CreateUnitOfMeasure,
         {
             var result = Result.BadRequest<UnitOfMeasureModel>();
 
+            // Check for empty strings for Name and Abbreviation, as IsRequired in EF allows for empty strings.
+            if (request.Name.IsNullOrEmpty())
+            {
+                result.AddError(nameof(request.Name), $"A value for {nameof(request.Name)} is required.");
+            }
+
+            if (request.Abbreviation.IsNullOrEmpty())
+            {
+                result.AddError(nameof(request.Abbreviation), $"A value for {nameof(request.Abbreviation)} is required.");
+            }
+
             // Check for duplicate Name or Abbreviation
             if (await _dbContext.UnitOfMeasures.AnyAsync(p => p.Name.Equals(request.Name), cancellationToken))
             {
@@ -30,6 +42,12 @@ internal class CreateValidationBehavior : IPipelineBehavior<CreateUnitOfMeasure,
             if (await _dbContext.UnitOfMeasures.AnyAsync(p => p.Abbreviation.Equals(request.Abbreviation), cancellationToken))
             {
                 result.AddError(nameof(request.Abbreviation), $"The value '{request.Abbreviation}' for {nameof(request.Abbreviation)} already exists.");
+            }
+
+            // Check that Conversion ratio is greater than zero.
+            if (request.ConversionToGramsRatio <= 0)
+            {
+                result.AddError(nameof(request.ConversionToGramsRatio), $"The value for {nameof(request.ConversionToGramsRatio)} must be greater than zero (0).");
             }
 
             if (result.HasErrors)

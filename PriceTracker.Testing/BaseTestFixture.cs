@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using PriceTracker.Data;
 using Respawn;
 using Respawn.Graph;
+using System.Collections.Generic;
 using System.Data.Common;
 using System.IO;
 
@@ -82,6 +83,22 @@ public class BaseTestFixture : IAsyncLifetime
 
         await context.SaveChangesAsync();
     }
+
+    public async Task AddRangeAsync<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
+    {
+        var context = _scopeFactory.CreateScope().ServiceProvider.GetRequiredService<ApplicationDBContext>();
+        context.AddRange(entities);
+
+        await context.SaveChangesAsync();
+    }
+
+    public async Task<TEntity> FindAsync<TEntity>(params object[] keyValues) where TEntity : class
+    {
+        var context = _scopeFactory.CreateScope().ServiceProvider.GetRequiredService<ApplicationDBContext>();
+        return await context.FindAsync<TEntity>(keyValues);
+    }
+
+    internal ApplicationDBContext Database => _scopeFactory.CreateScope().ServiceProvider.GetRequiredService<ApplicationDBContext>();
 
     public Task ResetDatabase()
     {
