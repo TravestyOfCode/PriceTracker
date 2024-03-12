@@ -73,7 +73,7 @@ public class CreateUnitOfMeasureTests : IAsyncLifetime, IClassFixture<BaseTestFi
 
         // Assert
         result.WasSuccess.Should().BeFalse();
-        result.StatusCode.Should().Be(System.Net.HttpStatusCode.InternalServerError);
+        result.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
     }
 
     public async Task DisposeAsync()
