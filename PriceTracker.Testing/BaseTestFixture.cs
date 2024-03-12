@@ -40,7 +40,7 @@ public class BaseTestFixture : IAsyncLifetime
 
         var db = provider.GetRequiredService<ApplicationDBContext>();
         db.Database.EnsureDeleted();
-        db.Database.EnsureCreated();
+        db.Database.Migrate();
     }
 
     public async Task InitializeAsync()
