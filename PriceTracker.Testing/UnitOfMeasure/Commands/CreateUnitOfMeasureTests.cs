@@ -14,7 +14,7 @@ public class CreateUnitOfMeasureTests : IAsyncLifetime, IClassFixture<BaseTestFi
     public Task InitializeAsync() => Task.CompletedTask;
 
     [Fact]
-    public async Task CanAddNewUnitOfMeasure()
+    public async Task Create_With_Valid_Values_Is_Possible()
     {
         // Arrange        
         var createCommand = new CreateUnitOfMeasure() { Name = "ounce", Abbreviation = "oz", ConversionToGramsRatio = 28.5m };
@@ -31,7 +31,7 @@ public class CreateUnitOfMeasureTests : IAsyncLifetime, IClassFixture<BaseTestFi
     }
 
     [Fact]
-    public async Task CanNotAddNewUnitOfMeasureWithDuplicateName()
+    public async Task Create_With_Duplicate_Name_Is_Not_Possible()
     {
         // Arrange 
         await _scope.AddAsync(new Data.Entity.UnitOfMeasure() { Name = "ounce", Abbreviation = "o", ConversionToGramsRatio = 28.5m });
@@ -47,7 +47,7 @@ public class CreateUnitOfMeasureTests : IAsyncLifetime, IClassFixture<BaseTestFi
     }
 
     [Fact]
-    public async Task CanNotAddNewUnitOfMeasureWithDuplicateAbbreviation()
+    public async Task Create_With_Duplicate_Abbreviation_Is_Not_Possible()
     {
         // Arrange
         await _scope.AddAsync(new Data.Entity.UnitOfMeasure() { Name = "ounces", Abbreviation = "oz", ConversionToGramsRatio = 28.5m });
@@ -63,7 +63,7 @@ public class CreateUnitOfMeasureTests : IAsyncLifetime, IClassFixture<BaseTestFi
     }
 
     [Fact]
-    public async Task CanNotAddNewUnitOfMeasureEmptyName()
+    public async Task Create_Without_Name_Is_Not_Possible()
     {
         // Arrange
         var createCommand = new CreateUnitOfMeasure() { Name = "", Abbreviation = "oz", ConversionToGramsRatio = 28.5m };
