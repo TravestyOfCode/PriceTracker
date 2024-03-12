@@ -76,6 +76,48 @@ public class CreateUnitOfMeasureTests : IAsyncLifetime, IClassFixture<BaseTestFi
         result.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
     }
 
+    [Fact]
+    public async Task Create_Without_Abbreviation_Is_Not_Possible()
+    {
+        // Arrange
+        var createCommand = new CreateUnitOfMeasure() { Name = "ounce", Abbreviation = "", ConversionToGramsRatio = 28.5m };
+
+        // Act
+        var result = await _scope.SendAsync(createCommand);
+
+        // Assert
+        result.WasSuccess.Should().BeFalse();
+        result.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
+    }
+
+    [Fact]
+    public async Task Create_With_Negative_Conversion_Ratio_Is_Not_Possible()
+    {
+        // Arrange
+        var createCommand = new CreateUnitOfMeasure() { Name = "ounce", Abbreviation = "", ConversionToGramsRatio = -28.5m };
+
+        // Act
+        var result = await _scope.SendAsync(createCommand);
+
+        // Assert
+        result.WasSuccess.Should().BeFalse();
+        result.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
+    }
+
+    [Fact]
+    public async Task Create_With_Zero_Conversion_Ratio_Is_Not_Possible()
+    {
+        // Arrange
+        var createCommand = new CreateUnitOfMeasure() { Name = "ounce", Abbreviation = "", ConversionToGramsRatio = 0m };
+
+        // Act
+        var result = await _scope.SendAsync(createCommand);
+
+        // Assert
+        result.WasSuccess.Should().BeFalse();
+        result.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
+    }
+
     public async Task DisposeAsync()
     {
         await _scope.ResetDatabase();
