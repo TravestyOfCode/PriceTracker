@@ -83,6 +83,12 @@ public class BaseTestFixture : IAsyncLifetime
         await context.SaveChangesAsync();
     }
 
+    public async Task<TEntity> FindAsync<TEntity>(params object[] keyValues) where TEntity : class
+    {
+        var context = _scopeFactory.CreateScope().ServiceProvider.GetRequiredService<ApplicationDBContext>();
+        return await context.FindAsync<TEntity>(keyValues);
+    }
+
     public Task ResetDatabase()
     {
         return _respawner.ResetAsync(_connection);
