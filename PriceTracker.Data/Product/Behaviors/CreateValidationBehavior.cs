@@ -29,7 +29,7 @@ internal class CreateValidationBehavior : IPipelineBehavior<CreateProduct, Resul
             }
 
             // Check for duplicate Name
-            if (await _dbContext.UnitOfMeasures.AnyAsync(p => p.Name.Equals(request.Name), cancellationToken))
+            if (await _dbContext.Products.AnyAsync(p => p.Name.Equals(request.Name), cancellationToken))
             {
                 result.AddError(nameof(request.Name), $"The value '{request.Name}' for {nameof(request.Name)} already exists.");
             }
