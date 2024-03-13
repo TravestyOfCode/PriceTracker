@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.IO;
@@ -8,6 +7,7 @@ namespace PriceTracker.Data;
 
 internal class ApplicationDBContext : IdentityDbContext<ApplicationUser>
 {
+    public DbSet<Entity.Product> Products { get; set; }
     public DbSet<Entity.UnitOfMeasure> UnitOfMeasures { get; set; }
 
     public ApplicationDBContext(DbContextOptions options) : base(options)
