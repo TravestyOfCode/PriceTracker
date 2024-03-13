@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using PriceTracker.Data.PriceHistory;
 using System.Linq;
 
 namespace PriceTracker.Data.Entity;

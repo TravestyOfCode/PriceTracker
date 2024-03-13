@@ -3,7 +3,7 @@ using PriceTracker.Data.Store;
 using PriceTracker.Data.UnitOfMeasure;
 using System.ComponentModel.DataAnnotations;
 
-namespace PriceTracker.Data;
+namespace PriceTracker.Data.PriceHistory;
 
 public class PriceHistoryModel
 {
