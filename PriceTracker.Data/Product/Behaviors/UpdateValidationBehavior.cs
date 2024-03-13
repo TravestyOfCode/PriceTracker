@@ -30,7 +30,7 @@ internal class UpdateValidationBehavior : IPipelineBehavior<UpdateProduct, Resul
 
             // Check for duplicate Name. Be sure to skip this Product
             // when checking as we may only be updating one of the fields.
-            if (await _dbContext.UnitOfMeasures.AnyAsync(p => p.Name.Equals(request.Name) && !p.Id.Equals(request.Id), cancellationToken))
+            if (await _dbContext.Products.AnyAsync(p => p.Name.Equals(request.Name) && !p.Id.Equals(request.Id), cancellationToken))
             {
                 result.AddError(nameof(request.Name), $"The value '{request.Name}' for {nameof(request.Name)} already exists.");
             }
