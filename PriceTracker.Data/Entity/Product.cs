@@ -1,4 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using PriceTracker.Data.Product;
+using PriceTracker.Data.UnitOfMeasure;
+using System.Linq;
 
 namespace PriceTracker.Data.Entity;
 
@@ -34,5 +37,47 @@ internal class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.HasIndex(p => p.Name)
             .IsUnique(true)
             .IsClustered(false);
+    }
+}
+
+internal static class ProductExtensions
+{
+    public static ProductModel AsModel(this Product entity)
+    {
+        return entity == null ? null : new ProductModel()
+        {
+            Id = entity.Id,
+            Name = entity.Name,
+            DefaultUnitOfMeasureId = entity.DefaultUnitOfMeasureId,
+            DefaultUnitOfMeasure = entity.DefaultUnitOfMeasure.AsModel()
+        };
+    }
+
+    public static IQueryable<ProductModel> ProjectToModel(this IQueryable<Product> query, bool includeDefaultUnitOfMeasure = true)
+    {
+        if (includeDefaultUnitOfMeasure)
+        {
+            return query?.Select(p => new ProductModel()
+            {
+                Id = p.Id,
+                Name = p.Name,
+                DefaultUnitOfMeasureId = p.DefaultUnitOfMeasureId,
+                DefaultUnitOfMeasure = new UnitOfMeasureModel()
+                {
+                    Id = p.DefaultUnitOfMeasure.Id,
+                    Name = p.DefaultUnitOfMeasure.Name,
+                    Abbreviation = p.DefaultUnitOfMeasure.Abbreviation,
+                    ConversionToGramsRatio = p.DefaultUnitOfMeasure.ConversionToGramsRatio
+                }
+            });
+        }
+
+        return query?.Select(p => new ProductModel()
+        {
+            Id = p.Id,
+            Name = p.Name,
+            DefaultUnitOfMeasureId = p.DefaultUnitOfMeasureId
+        });
+
     }
 }
