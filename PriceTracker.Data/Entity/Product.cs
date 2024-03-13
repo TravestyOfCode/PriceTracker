@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PriceTracker.Data.Product;
 using PriceTracker.Data.UnitOfMeasure;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PriceTracker.Data.Entity;
@@ -14,6 +15,8 @@ internal class Product
     public int? DefaultUnitOfMeasureId { get; set; }
 
     public UnitOfMeasure DefaultUnitOfMeasure { get; set; }
+
+    public IList<PriceHistory> PriceHistories { get; set; }
 }
 
 internal class ProductConfiguration : IEntityTypeConfiguration<Product>
