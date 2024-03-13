@@ -8,6 +8,7 @@ namespace PriceTracker.Data;
 internal class ApplicationDBContext : IdentityDbContext<ApplicationUser>
 {
     public DbSet<Entity.Product> Products { get; set; }
+    public DbSet<Entity.Store> Stores { get; set; }
     public DbSet<Entity.UnitOfMeasure> UnitOfMeasures { get; set; }
 
     public ApplicationDBContext(DbContextOptions options) : base(options)

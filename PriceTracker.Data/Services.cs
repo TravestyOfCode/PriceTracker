@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PriceTracker.Data.Product.Behaviors;
+using PriceTracker.Data.Store.Behaviors;
 using PriceTracker.Data.UnitOfMeasure.Behaviors;
 
 namespace PriceTracker.Data;
@@ -32,7 +33,8 @@ public static class Services
 
             // Add behaviors
             config.AddUnitOfMeasureBehaviors()
-                  .AddProductBehaviors();
+                  .AddProductBehaviors()
+                  .AddStoreBehaviors();
 
         });
 
