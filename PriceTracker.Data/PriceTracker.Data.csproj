@@ -18,7 +18,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="PriceTracker.Testing"/>
+		<InternalsVisibleTo Include="PriceTracker.Testing" />
 	</ItemGroup>
 
 </Project>

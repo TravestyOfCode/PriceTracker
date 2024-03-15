@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PriceTracker.Data;
 
@@ -11,9 +12,11 @@ using PriceTracker.Data;
 namespace PriceTracker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240315135041_Adds-PriceHistory")]
+    partial class AddsPriceHistory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -230,9 +233,6 @@ namespace PriceTracker.Data.Migrations
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("date");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(9,5)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
