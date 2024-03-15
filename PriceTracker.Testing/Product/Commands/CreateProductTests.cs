@@ -6,7 +6,7 @@ public class CreateProductTests : IClassFixture<BaseTestFixture>, IAsyncLifetime
 {
     private readonly BaseTestFixture _fixture;
 
-    private Data.Entity.UnitOfMeasure _ouncesUoM = new Data.Entity.UnitOfMeasure() { Name = "ounce", Abbreviation = "oz" };
+    private readonly Data.Entity.UnitOfMeasure _ouncesUoM = new Data.Entity.UnitOfMeasure() { Name = "ounce", Abbreviation = "oz" };
 
     public CreateProductTests(BaseTestFixture fixture)
     {
