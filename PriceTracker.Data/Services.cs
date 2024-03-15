@@ -6,6 +6,7 @@ using PriceTracker.Data.PriceHistory.Behaviors;
 using PriceTracker.Data.Product.Behaviors;
 using PriceTracker.Data.Store.Behaviors;
 using PriceTracker.Data.UnitOfMeasure.Behaviors;
+using PriceTracker.Data.User;
 
 namespace PriceTracker.Data;
 
@@ -26,6 +27,8 @@ public static class Services
             })
             .AddEntityFrameworkStores<ApplicationDBContext>()
             .AddDefaultTokenProviders();
+
+        builder.Services.AddScoped<IUserManager, UserManager>();
 
         // Add MediatR configuration
         builder.Services.AddMediatR(config =>
