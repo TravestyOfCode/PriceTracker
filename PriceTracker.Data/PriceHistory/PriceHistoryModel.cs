@@ -26,7 +26,7 @@ public class PriceHistoryModel
     public decimal Quantity { get; set; }
 
     [Display(Name = "Date")]
-    public DateOnly Date { get; set; }
+    public DateTime Date { get; set; }
 
     [Display(Name = "Store Id")]
     public int? StoreId { get; set; }
