@@ -11,7 +11,7 @@ using PriceTracker.Data;
 namespace PriceTracker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    internal class AppDBContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

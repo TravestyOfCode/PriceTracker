@@ -2,28 +2,27 @@
 
 #nullable disable
 
-namespace PriceTracker.Data.Migrations
+namespace PriceTracker.Data.Migrations;
+
+/// <inheritdoc />
+internal partial class AddsPricePriceHistory : Migration
 {
     /// <inheritdoc />
-    public partial class AddsPricePriceHistory : Migration
+    protected override void Up(MigrationBuilder migrationBuilder)
     {
-        /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.AddColumn<decimal>(
-                name: "Price",
-                table: "PriceHistory",
-                type: "decimal(9,5)",
-                nullable: false,
-                defaultValue: 0m);
-        }
+        migrationBuilder.AddColumn<decimal>(
+            name: "Price",
+            table: "PriceHistory",
+            type: "decimal(9,5)",
+            nullable: false,
+            defaultValue: 0m);
+    }
 
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropColumn(
-                name: "Price",
-                table: "PriceHistory");
-        }
+    /// <inheritdoc />
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.DropColumn(
+            name: "Price",
+            table: "PriceHistory");
     }
 }

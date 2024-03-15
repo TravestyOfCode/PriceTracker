@@ -4,14 +4,14 @@ using System.Linq;
 
 namespace PriceTracker.Data.Entity;
 
-public class Store
+internal class Store
 {
     public int Id { get; set; }
 
     public string Name { get; set; }
 }
 
-public class StoreConfiguration : IEntityTypeConfiguration<Store>
+internal class StoreConfiguration : IEntityTypeConfiguration<Store>
 {
     public void Configure(EntityTypeBuilder<Store> builder)
     {
