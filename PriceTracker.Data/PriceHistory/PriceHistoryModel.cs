@@ -25,6 +25,9 @@ public class PriceHistoryModel
     [Display(Name = "Quantity")]
     public decimal Quantity { get; set; }
 
+    [Display(Name = "Price")]
+    public decimal Price { get; set; }
+
     [Display(Name = "Date")]
     public DateTime Date { get; set; }
 

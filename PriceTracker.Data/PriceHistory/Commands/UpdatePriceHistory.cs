@@ -18,6 +18,9 @@ public class UpdatePriceHistory : IRequest<Result<PriceHistoryModel>>
     [Display(Name = "Quantity")]
     public decimal Quantity { get; set; }
 
+    [Display(Name = "Price")]
+    public decimal Price { get; set; }
+
     [Display(Name = "Date")]
     public DateTime Date { get; set; }
 
@@ -51,6 +54,7 @@ internal class UpdatePriceHistoryHandler : IRequestHandler<UpdatePriceHistory, R
             entity.ProductId = request.ProductId;
             entity.UnitOfMeasureId = request.UnitOfMeasureId;
             entity.Quantity = request.Quantity;
+            entity.Price = request.Price;
             entity.Date = request.Date;
             entity.StoreId = request.StoreId;
 

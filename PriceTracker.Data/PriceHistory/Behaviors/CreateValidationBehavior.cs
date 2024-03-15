@@ -21,10 +21,15 @@ internal class CreateValidationBehavior : IPipelineBehavior<CreatePriceHistory, 
         {
             var result = Result.BadRequest<PriceHistoryModel>();
 
-            // Check to ensure quantity is greater than zero
+            // Check to ensure quantity and price are greater than zero
             if (request.Quantity <= 0)
             {
                 result.AddError(nameof(request.Quantity), $"The value for {nameof(request.Quantity)} must be greater than zero (0).");
+            }
+
+            if (request.Price <= 0)
+            {
+                result.AddError(nameof(request.Price), $"The value for {nameof(request.Price)} must be greater than zero (0).");
             }
 
             // Ensure the reference Id exists

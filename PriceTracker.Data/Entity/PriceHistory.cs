@@ -18,6 +18,8 @@ internal class PriceHistory
 
     public decimal Quantity { get; set; }
 
+    public decimal Price { get; set; }
+
     public DateTime Date { get; set; }
 
     public int? StoreId { get; set; }
@@ -34,6 +36,9 @@ internal class PriceHistoryConfiguration : IEntityTypeConfiguration<PriceHistory
         builder.HasKey(p => p.Id);
 
         builder.Property(p => p.Quantity)
+            .HasColumnType("decimal(9,5)");
+
+        builder.Property(p => p.Price)
             .HasColumnType("decimal(9,5)");
 
         builder.Property(p => p.Date)
@@ -71,6 +76,7 @@ internal static class PriceHistoryExtensions
             UnitOfMeasureId = entity.UnitOfMeasureId,
             UnitOfMeasure = entity.UnitOfMeasure.AsModel(),
             Quantity = entity.Quantity,
+            Price = entity.Price,
             Date = entity.Date,
             StoreId = entity.StoreId,
             Store = entity.Store.AsModel()
@@ -86,6 +92,7 @@ internal static class PriceHistoryExtensions
             UnitOfMeasureId = p.UnitOfMeasureId,
             StoreId = p.StoreId,
             Quantity = p.Quantity,
+            Price = p.Price,
             Date = p.Date,
             Product = p.Product == null ? null : new Data.Product.ProductModel()
             {
