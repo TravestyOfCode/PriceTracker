@@ -11,8 +11,6 @@ internal class UnitOfMeasure
     public string Name { get; set; }
 
     public string Abbreviation { get; set; }
-
-    public decimal ConversionToGramsRatio { get; set; }
 }
 
 internal class UnitOfMeasureConfiguration : IEntityTypeConfiguration<UnitOfMeasure>
@@ -30,9 +28,6 @@ internal class UnitOfMeasureConfiguration : IEntityTypeConfiguration<UnitOfMeasu
         builder.Property(p => p.Abbreviation)
             .IsRequired(true)
             .HasMaxLength(8);
-
-        builder.Property(p => p.ConversionToGramsRatio)
-            .HasColumnType("decimal(9,5)");
     }
 }
 
@@ -43,8 +38,7 @@ internal static class UnitOfMeasureExtensions
         return entity == null ? null : new UnitOfMeasureModel()
         {
             Name = entity.Name,
-            Abbreviation = entity.Abbreviation,
-            ConversionToGramsRatio = entity.ConversionToGramsRatio
+            Abbreviation = entity.Abbreviation
         };
     }
 
@@ -54,8 +48,7 @@ internal static class UnitOfMeasureExtensions
         {
             Id = p.Id,
             Name = p.Name,
-            Abbreviation = p.Abbreviation,
-            ConversionToGramsRatio = p.ConversionToGramsRatio
+            Abbreviation = p.Abbreviation
         });
     }
 }

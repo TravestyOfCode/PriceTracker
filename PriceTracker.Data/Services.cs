@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using PriceTracker.Data.PriceHistory.Behaviors;
 using PriceTracker.Data.Product.Behaviors;
 using PriceTracker.Data.Store.Behaviors;
+using PriceTracker.Data.UnitConversion.Behaviors;
 using PriceTracker.Data.UnitOfMeasure.Behaviors;
 using PriceTracker.Data.User;
 
@@ -39,7 +40,8 @@ public static class Services
             config.AddUnitOfMeasureBehaviors()
                   .AddProductBehaviors()
                   .AddStoreBehaviors()
-                  .AddPriceHistoryBehaviors();
+                  .AddPriceHistoryBehaviors()
+                  .AddUnitConversionBehaviors();
 
         });
 

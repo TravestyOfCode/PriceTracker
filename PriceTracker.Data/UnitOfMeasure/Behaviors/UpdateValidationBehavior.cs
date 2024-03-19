@@ -45,13 +45,6 @@ internal class UpdateValidationBehavior : IPipelineBehavior<UpdateUnitOfMeasure,
                 result.AddError(nameof(request.Abbreviation), $"The value '{request.Abbreviation}' for {nameof(request.Abbreviation)} already exists.");
             }
 
-            // Check that Conversion ratio is greater than zero.
-            if (request.ConversionToGramsRatio <= 0)
-            {
-                result.AddError(nameof(request.ConversionToGramsRatio), $"The value for {nameof(request.ConversionToGramsRatio)} must be greater than zero (0).");
-            }
-
-
             if (result.HasErrors)
             {
                 return result;

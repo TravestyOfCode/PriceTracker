@@ -19,9 +19,9 @@ public class DeleteUnitOfMeasureTests : IAsyncLifetime, IClassFixture<BaseTestFi
         // Seed data
         entities = new List<Data.Entity.UnitOfMeasure>()
         {
-            new Data.Entity.UnitOfMeasure() { Name = "ounces", Abbreviation = "ozs", ConversionToGramsRatio = 1.0m },
-            new Data.Entity.UnitOfMeasure() { Name = "pounds", Abbreviation = "lbs", ConversionToGramsRatio = 1.0m },
-            new Data.Entity.UnitOfMeasure() { Name = "grams", Abbreviation = "gs", ConversionToGramsRatio = 1.0m }
+            new Data.Entity.UnitOfMeasure() { Name = "ounces", Abbreviation = "ozs" },
+            new Data.Entity.UnitOfMeasure() { Name = "pounds", Abbreviation = "lbs" },
+            new Data.Entity.UnitOfMeasure() { Name = "grams", Abbreviation = "gs" }
         };
         await _fixture.AddRangeAsync(entities);
     }

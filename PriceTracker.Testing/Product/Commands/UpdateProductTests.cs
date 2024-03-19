@@ -21,8 +21,8 @@ public class UpdateProductTests : IAsyncLifetime, IClassFixture<BaseTestFixture>
         // Seed data
         uoms = new List<Data.Entity.UnitOfMeasure>()
         {
-            new Data.Entity.UnitOfMeasure(){ Name = "ounce", Abbreviation = "oz", ConversionToGramsRatio = 28.5m },
-            new Data.Entity.UnitOfMeasure(){ Name = "gram", Abbreviation = "g", ConversionToGramsRatio = 1.0m }
+            new Data.Entity.UnitOfMeasure(){ Name = "ounce", Abbreviation = "oz" },
+            new Data.Entity.UnitOfMeasure(){ Name = "gram", Abbreviation = "g" }
         };
         await _fixture.AddRangeAsync(uoms);
 
