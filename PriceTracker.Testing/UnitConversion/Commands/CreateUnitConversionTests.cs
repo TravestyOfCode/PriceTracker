@@ -9,8 +9,8 @@ public class CreateUnitConversionTests : IAsyncLifetime, IClassFixture<BaseTestF
 
     private readonly List<Data.Entity.UnitOfMeasure> _uoms = new List<Data.Entity.UnitOfMeasure>()
     {
-        new Data.Entity.UnitOfMeasure() { Name = "milliliter", Abbreviation = "ml", ConversionToGramsRatio = 1.0m },
-        new Data.Entity.UnitOfMeasure() { Name = "ounce", Abbreviation = "oz", ConversionToGramsRatio = 28.35m }
+        new Data.Entity.UnitOfMeasure() { Name = "milliliter", Abbreviation = "ml" },
+        new Data.Entity.UnitOfMeasure() { Name = "ounce", Abbreviation = "oz" }
     };
 
     public CreateUnitConversionTests(BaseTestFixture fixture)

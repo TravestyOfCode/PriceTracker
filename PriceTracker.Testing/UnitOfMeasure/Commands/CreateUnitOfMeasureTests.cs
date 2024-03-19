@@ -17,7 +17,7 @@ public class CreateUnitOfMeasureTests : IAsyncLifetime, IClassFixture<BaseTestFi
     public async Task Create_With_Valid_Values_Is_Possible()
     {
         // Arrange        
-        var createCommand = new CreateUnitOfMeasure() { Name = "ounce", Abbreviation = "oz", ConversionToGramsRatio = 28.5m };
+        var createCommand = new CreateUnitOfMeasure() { Name = "ounce", Abbreviation = "oz" };
 
         // Act
         var result = await _scope.SendAsync(createCommand);
@@ -27,15 +27,14 @@ public class CreateUnitOfMeasureTests : IAsyncLifetime, IClassFixture<BaseTestFi
         result.Value.Should().NotBeNull();
         result.Value.Name.Should().Be(createCommand.Name);
         result.Value.Abbreviation.Should().Be(createCommand.Abbreviation);
-        result.Value.ConversionToGramsRatio.Should().Be(createCommand.ConversionToGramsRatio);
     }
 
     [Fact]
     public async Task Create_With_Duplicate_Name_Is_Not_Possible()
     {
         // Arrange 
-        await _scope.AddAsync(new Data.Entity.UnitOfMeasure() { Name = "ounce", Abbreviation = "o", ConversionToGramsRatio = 28.5m });
-        var createCommand = new CreateUnitOfMeasure() { Name = "ounce", Abbreviation = "oz", ConversionToGramsRatio = 28.5m };
+        await _scope.AddAsync(new Data.Entity.UnitOfMeasure() { Name = "ounce", Abbreviation = "o" });
+        var createCommand = new CreateUnitOfMeasure() { Name = "ounce", Abbreviation = "oz" };
 
         // Act
         var result = await _scope.SendAsync(createCommand);
@@ -50,8 +49,8 @@ public class CreateUnitOfMeasureTests : IAsyncLifetime, IClassFixture<BaseTestFi
     public async Task Create_With_Duplicate_Abbreviation_Is_Not_Possible()
     {
         // Arrange
-        await _scope.AddAsync(new Data.Entity.UnitOfMeasure() { Name = "ounces", Abbreviation = "oz", ConversionToGramsRatio = 28.5m });
-        var createCommand = new CreateUnitOfMeasure() { Name = "ounce", Abbreviation = "oz", ConversionToGramsRatio = 28.5m };
+        await _scope.AddAsync(new Data.Entity.UnitOfMeasure() { Name = "ounces", Abbreviation = "oz" });
+        var createCommand = new CreateUnitOfMeasure() { Name = "ounce", Abbreviation = "oz" };
 
         // Act
         var result = await _scope.SendAsync(createCommand);
@@ -66,7 +65,7 @@ public class CreateUnitOfMeasureTests : IAsyncLifetime, IClassFixture<BaseTestFi
     public async Task Create_Without_Name_Is_Not_Possible()
     {
         // Arrange
-        var createCommand = new CreateUnitOfMeasure() { Name = "", Abbreviation = "oz", ConversionToGramsRatio = 28.5m };
+        var createCommand = new CreateUnitOfMeasure() { Name = "", Abbreviation = "oz" };
 
         // Act
         var result = await _scope.SendAsync(createCommand);
@@ -80,35 +79,7 @@ public class CreateUnitOfMeasureTests : IAsyncLifetime, IClassFixture<BaseTestFi
     public async Task Create_Without_Abbreviation_Is_Not_Possible()
     {
         // Arrange
-        var createCommand = new CreateUnitOfMeasure() { Name = "ounce", Abbreviation = "", ConversionToGramsRatio = 28.5m };
-
-        // Act
-        var result = await _scope.SendAsync(createCommand);
-
-        // Assert
-        result.WasSuccess.Should().BeFalse();
-        result.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
-    }
-
-    [Fact]
-    public async Task Create_With_Negative_Conversion_Ratio_Is_Not_Possible()
-    {
-        // Arrange
-        var createCommand = new CreateUnitOfMeasure() { Name = "ounce", Abbreviation = "", ConversionToGramsRatio = -28.5m };
-
-        // Act
-        var result = await _scope.SendAsync(createCommand);
-
-        // Assert
-        result.WasSuccess.Should().BeFalse();
-        result.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
-    }
-
-    [Fact]
-    public async Task Create_With_Zero_Conversion_Ratio_Is_Not_Possible()
-    {
-        // Arrange
-        var createCommand = new CreateUnitOfMeasure() { Name = "ounce", Abbreviation = "", ConversionToGramsRatio = 0m };
+        var createCommand = new CreateUnitOfMeasure() { Name = "ounce", Abbreviation = "" };
 
         // Act
         var result = await _scope.SendAsync(createCommand);
