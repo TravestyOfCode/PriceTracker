@@ -104,8 +104,7 @@ internal static class PriceHistoryExtensions
             {
                 Id = p.UnitOfMeasure.Id,
                 Name = p.UnitOfMeasure.Name,
-                Abbreviation = p.UnitOfMeasure.Abbreviation,
-                ConversionToGramsRatio = p.UnitOfMeasure.ConversionToGramsRatio
+                Abbreviation = p.UnitOfMeasure.Abbreviation
             },
             Store = p.Store == null ? null : new Data.Store.StoreModel()
             {

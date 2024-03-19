@@ -10,8 +10,6 @@ public class UpdateUnitOfMeasure : IRequest<Result<UnitOfMeasureModel>>
     public string Name { get; set; }
 
     public string Abbreviation { get; set; }
-
-    public decimal ConversionToGramsRatio { get; set; }
 }
 
 internal class UpdateUnitOfMeasureHandler : IRequestHandler<UpdateUnitOfMeasure, Result<UnitOfMeasureModel>>
@@ -39,7 +37,6 @@ internal class UpdateUnitOfMeasureHandler : IRequestHandler<UpdateUnitOfMeasure,
 
             entity.Name = request.Name;
             entity.Abbreviation = request.Abbreviation;
-            entity.ConversionToGramsRatio = request.ConversionToGramsRatio;
 
             await _dbContext.SaveChangesAsync(cancellationToken);
 

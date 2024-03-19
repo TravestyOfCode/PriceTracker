@@ -30,8 +30,7 @@ internal class GetUnitOfMeasuresAsDictHandler : IRequestHandler<GetUnitOfMeasure
                                    {
                                        Id = p.Id,
                                        Name = p.Name,
-                                       Abbreviation = p.Abbreviation,
-                                       ConversionToGramsRatio = p.ConversionToGramsRatio
+                                       Abbreviation = p.Abbreviation
                                    }, cancellationToken);
 
             return Result.Ok(entities);

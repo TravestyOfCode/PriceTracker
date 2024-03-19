@@ -16,8 +16,4 @@ public class UnitOfMeasureModel
     [Required]
     [MaxLength(8)]
     public string Abbreviation { get; set; }
-
-    [Display(Name = "Conversion to Grams Ratio")]
-    [Required]
-    public decimal ConversionToGramsRatio { get; set; }
 }

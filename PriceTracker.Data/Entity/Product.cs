@@ -69,8 +69,7 @@ internal static class ProductExtensions
                 {
                     Id = p.DefaultUnitOfMeasure.Id,
                     Name = p.DefaultUnitOfMeasure.Name,
-                    Abbreviation = p.DefaultUnitOfMeasure.Abbreviation,
-                    ConversionToGramsRatio = p.DefaultUnitOfMeasure.ConversionToGramsRatio
+                    Abbreviation = p.DefaultUnitOfMeasure.Abbreviation
                 }
             });
         }

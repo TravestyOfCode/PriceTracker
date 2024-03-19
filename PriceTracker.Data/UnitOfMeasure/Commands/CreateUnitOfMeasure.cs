@@ -8,8 +8,6 @@ public class CreateUnitOfMeasure : IRequest<Result<UnitOfMeasureModel>>
     public string Name { get; set; }
 
     public string Abbreviation { get; set; }
-
-    public decimal ConversionToGramsRatio { get; set; }
 }
 
 internal class CreateUnitOfMeasureHandler : IRequestHandler<CreateUnitOfMeasure, Result<UnitOfMeasureModel>>
@@ -31,8 +29,7 @@ internal class CreateUnitOfMeasureHandler : IRequestHandler<CreateUnitOfMeasure,
             var entity = _dbContext.UnitOfMeasures.Add(new Entity.UnitOfMeasure()
             {
                 Name = request.Name,
-                Abbreviation = request.Abbreviation,
-                ConversionToGramsRatio = request.ConversionToGramsRatio
+                Abbreviation = request.Abbreviation
             });
 
             await _dbContext.SaveChangesAsync(cancellationToken);

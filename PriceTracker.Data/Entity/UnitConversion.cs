@@ -71,7 +71,6 @@ internal static class UnitConversionExtensions
             {
                 Id = p.SourceUnitOfMeasure.Id,
                 Abbreviation = p.SourceUnitOfMeasure.Abbreviation,
-                ConversionToGramsRatio = p.SourceUnitOfMeasure.ConversionToGramsRatio,
                 Name = p.SourceUnitOfMeasure.Name
             },
             DestinationUnitOfMeasureId = p.DestinationUnitOfMeasureId,
@@ -79,7 +78,6 @@ internal static class UnitConversionExtensions
             {
                 Id = p.DestinationUnitOfMeasure.Id,
                 Abbreviation = p.DestinationUnitOfMeasure.Abbreviation,
-                ConversionToGramsRatio = p.DestinationUnitOfMeasure.ConversionToGramsRatio,
                 Name = p.DestinationUnitOfMeasure.Name
             },
             ConversionRatio = p.ConversionRatio
