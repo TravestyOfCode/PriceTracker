@@ -1,5 +1,6 @@
 ﻿using PriceTracker.Data.Entity;
 using PriceTracker.Data.Results;
+using System.Linq;
 
 namespace PriceTracker.Data.UnitOfMeasure.Queries;
 
@@ -25,6 +26,7 @@ internal class GetUnitOfMeasureByIdHandler : IRequestHandler<GetUnitOfMeasureByI
         try
         {
             var entity = await _dbContext.UnitOfMeasures
+                .Where(p => p.Id.Equals(request.Id))
                 .ProjectToModel()
                 .SingleOrDefaultAsync(cancellationToken);
 
