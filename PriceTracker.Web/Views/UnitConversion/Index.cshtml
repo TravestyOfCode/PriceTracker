@@ -1,0 +1,54 @@
+﻿@model PriceTracker.Web.Models.UnitConversion.IndexViewModel
+
+@{
+    ViewData["Title"] = "Unit Conversions";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div id="alert"></div>
+<table class="table">
+    <caption class="caption-top"><button type="button" class="btn btn-primary float-end" onclick="document.getElementById('create-modal').showModal()">Create New</button></caption>
+    
+    <thead>
+        <tr>
+            <th>Source Unit</th>
+            <th>Destination Unit</th>
+            <th>Conversion Ratio</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="uom-list">
+        <partial name="IndexBody" for="@Model.UnitConversionList" />
+    </tbody>
+</table>
+
+<dialog id="create-modal" class="w-50">
+    <partial name="CreateModal" for="@Model.Request" />
+</dialog>
+
+
+@section Scripts {
+    <script src="~/lib/htmx.org/dist/htmx.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Needed to support OOB with table rows. Breaks IE 11 support.
+        htmx.config.useTemplateFragments = true;
+
+        function cancelDialog() {
+            var dialog = document.getElementById("create-modal");
+            var inputs = dialog.querySelectorAll("input");
+            var spans = dialog.querySelectorAll("span");
+
+            for (let i = 0; i < inputs.length; i++) {
+                inputs[i].value = "";
+            }
+
+            for (let i = 0; i < spans.length; i++) {
+                spans[i].innerText = "";
+            }
+
+            dialog.close();
+        }
+    </script>
+}

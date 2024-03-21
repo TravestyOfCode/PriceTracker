@@ -1,0 +1,9 @@
+﻿@model PriceTracker.Data.UnitConversion.UnitConversionModel
+
+<td>@Model.SourceUnitOfMeasure.Name</td>
+<td>@Model.DestinationUnitOfMeasure.Name</td>
+<td>@Model.ConversionRatio</td>
+<td>
+    <button type="button" class="btn btn-primary" hx-get="/UnitConversion/EditRow?id=@Model.Id" hx-target="#unit-@Model.Id">Edit</button>
+    <button type="button" class="btn btn-danger" hx-delete="/UnitConversion/DeleteRow?id=@Model.Id" hx-target="#unit-@Model.Id" hx-swap="outerHTML" hx-confirm="Are you sure you want to delete this Unit Conversion?@($"\n {Model.SourceUnitOfMeasure.Name} to {Model.DestinationUnitOfMeasure.Name}")">Delete</button>
+</td>

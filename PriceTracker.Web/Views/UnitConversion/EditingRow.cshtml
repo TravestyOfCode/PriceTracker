@@ -1,0 +1,31 @@
+﻿@model PriceTracker.Web.Models.UnitConversion.EditRowViewModel
+
+@{
+    var sourceSelectList = new SelectList(Model.UnitOfMeasureDict, "Key", "Value.Name", Model.UnitConversion.SourceUnitOfMeasureId);
+    var destSelectList = new SelectList(Model.UnitOfMeasureDict, "Key", "Value.Name", Model.UnitConversion.DestinationUnitOfMeasureId);
+}
+
+<td>
+    <select asp-for="UnitConversion.SourceUnitOfMeasureId" name="SourceUnitOfMeasureId" asp-items="sourceSelectList"></select>
+    <span class="text-danger" asp-validation-for="UnitConversion.SourceUnitOfMeasureId"></span>
+</td>
+<td>
+    <select asp-for="UnitConversion.DestinationUnitOfMeasureId" name="DestinationUnitOfMeasureId" asp-items="destSelectList"></select>
+    <span class="text-danger" asp-validation-for="UnitConversion.DestinationUnitOfMeasureId"></span>
+</td>
+
+<td>
+    <input asp-for="UnitConversion.ConversionRatio" name="ConversionRatio" class="form-control" />
+    <span class="text-danger" asp-validation-for="UnitConversion.ConversionRatio"></span>
+</td>
+
+<td>
+    <input type="hidden" asp-for="UnitConversion.Id" name="Id" />
+    <button type="button" class="btn btn-secondary" hx-get="/UnitConversion/CancelEditRow?id=@Model.UnitConversion.Id" hx-target="#unit-@Model.UnitConversion.Id">Cancel</button>
+    <button type="button" class="btn btn-success" hx-post="/UnitConversion/EditRow" hx-target="#unit-@Model.UnitConversion.Id" hx-include="closest tr">Save</button>
+</td>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div asp-validation-summary="ModelOnly" id="alert" hx-swap-oob="true" class="text-danger"></div>
+}

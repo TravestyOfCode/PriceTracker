@@ -1,0 +1,38 @@
+﻿@model PriceTracker.Web.Models.UnitConversion.CreateModalViewModel
+
+@{
+    var sourceSelectList = new SelectList(Model.UnitOfMeasureDict, "Key", "Value.Name", Model.Request.SourceUnitOfMeasureId);
+    var destSelectList = new SelectList(Model.UnitOfMeasureDict, "Key", "Value.Name", Model.Request.DestinationUnitOfMeasureId);
+}
+
+<div class="modal-header mb-3 fs-2">Create New Unit of Measure</div>
+<div class="modal-body">
+    <form id="create-form">
+        <div class="row mb-3">
+            <label asp-for="Request.SourceUnitOfMeasureId" class="col-sm-4 col-md-3 col-lg-2 col-form-label"></label>
+            <div class="col-sm-8 col-md-9 col-lg-10">
+                <select asp-for="Request.SourceUnitOfMeasureId" name="SourceUnitOfMeasureId" asp-items="sourceSelectList"></select>
+                <span class="text-danger" asp-validation-for="Request.SourceUnitOfMeasureId"></span>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label asp-for="Request.DestinationUnitOfMeasureId" class="col-sm-4 col-md-3 col-lg-2 col-form-label"></label>
+            <div class="col-sm-8 col-md-9 col-lg-10">
+                <select asp-for="Request.DestinationUnitOfMeasureId" name="DestinationUnitOfMeasureId" asp-items="destSelectList"></select>
+                <span class="text-danger" asp-validation-for="Request.DestinationUnitOfMeasureId"></span>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label asp-for="Request.ConversionRatio" class="col-sm-4 col-md-3 col-lg-2 col-form-label"></label>
+            <input asp-for="Request.ConversionRatio" name="ConversionRatio" class="form-control" />
+            <span class="text-danger" asp-validation-for="Request.ConversionRatio"></span>
+        </div>
+
+        <div class="float-end">
+            <button type="button" class="btn btn-secondary" id="create-modal-cancel" onclick="cancelDialog()">Cancel</button>
+            <button type="button" class="btn btn-success" hx-post="/UnitConversion/Create" hx-target="#create-modal">Create</button>
+        </div>
+    </form>
+</div>

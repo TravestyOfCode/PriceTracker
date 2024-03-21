@@ -1,0 +1,8 @@
+﻿@model IEnumerable<PriceTracker.Data.UnitConversion.UnitConversionModel>
+
+@foreach (var unit in Model)
+{
+    <tr id="unit-@unit.Id">
+    <partial name="EditableRow" for="@unit" />
+    </tr>
+}
