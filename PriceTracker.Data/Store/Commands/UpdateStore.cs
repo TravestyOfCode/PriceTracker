@@ -31,7 +31,7 @@ internal class UpdateStoreHandler : IRequestHandler<UpdateStore, Result<StoreMod
     {
         try
         {
-            var entity = await _dbContext.Stores.SingleOrDefaultAsync(p => p.Id.Equals(request.Id), cancellationToken);
+            var entity = await _dbContext.Stores.AsTracking().SingleOrDefaultAsync(p => p.Id.Equals(request.Id), cancellationToken);
 
             if (entity == null)
             {

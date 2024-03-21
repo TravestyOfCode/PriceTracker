@@ -28,7 +28,7 @@ internal class UpdateUnitOfMeasureHandler : IRequestHandler<UpdateUnitOfMeasure,
     {
         try
         {
-            var entity = await _dbContext.UnitOfMeasures.SingleOrDefaultAsync(p => p.Id.Equals(request.Id), cancellationToken);
+            var entity = await _dbContext.UnitOfMeasures.AsTracking().SingleOrDefaultAsync(p => p.Id.Equals(request.Id), cancellationToken);
 
             if (entity == null)
             {

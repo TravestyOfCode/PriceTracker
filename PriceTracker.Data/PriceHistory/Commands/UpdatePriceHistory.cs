@@ -44,7 +44,7 @@ internal class UpdatePriceHistoryHandler : IRequestHandler<UpdatePriceHistory, R
     {
         try
         {
-            var entity = await _dbContext.PriceHistories.SingleOrDefaultAsync(p => p.Id.Equals(request.Id), cancellationToken);
+            var entity = await _dbContext.PriceHistories.AsTracking().SingleOrDefaultAsync(p => p.Id.Equals(request.Id), cancellationToken);
 
             if (entity == null)
             {

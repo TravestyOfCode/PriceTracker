@@ -38,7 +38,7 @@ internal class UpdateProductHandler : IRequestHandler<UpdateProduct, Result<Prod
     {
         try
         {
-            var entity = await _dbContext.Products.SingleOrDefaultAsync(p => p.Id.Equals(request.Id), cancellationToken);
+            var entity = await _dbContext.Products.AsTracking().SingleOrDefaultAsync(p => p.Id.Equals(request.Id), cancellationToken);
 
             if (entity == null)
             {
