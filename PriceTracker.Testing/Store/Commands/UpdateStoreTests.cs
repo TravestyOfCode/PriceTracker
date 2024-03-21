@@ -39,6 +39,11 @@ public class UpdateStoreTests : IAsyncLifetime, IClassFixture<BaseTestFixture>
         result.WasSuccess.Should().BeTrue();
         result.Value.Should().NotBeNull();
         result.Value.Name.Should().Be(command.Name);
+
+        var entity = await _fixture.FindAsync<Data.Entity.Store>(command.Id);
+        entity.Should().NotBeNull();
+        entity.Name.Should().Be(command.Name);
+
     }
 
     [Fact]

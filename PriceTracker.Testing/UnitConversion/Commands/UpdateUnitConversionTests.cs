@@ -47,6 +47,16 @@ public class UpdateUnitConversionTests : IAsyncLifetime, IClassFixture<BaseTestF
         result.Value.DestinationUnitOfMeasure.Name.Should().Be(_uoms[0].Name);
         result.Value.ConversionRatio.Should().Be(command.ConversionRatio);
 
+        var entity = await _fixture.FindAsync<Data.Entity.UnitConversion>(command.Id);
+        entity.Should().NotBeNull();
+        entity.SourceUnitOfMeasureId.Should().Be(command.SourceUnitOfMeasureId);
+        entity.SourceUnitOfMeasure.Should().NotBeNull();
+        entity.SourceUnitOfMeasure.Name.Should().Be(_uoms[1].Name);
+        entity.DestinationUnitOfMeasureId.Should().Be(command.DestinationUnitOfMeasureId);
+        entity.DestinationUnitOfMeasure.Should().NotBeNull();
+        entity.DestinationUnitOfMeasure.Name.Should().Be(_uoms[0].Name);
+        entity.ConversionRatio.Should().Be(command.ConversionRatio);
+
     }
 
     [Fact]

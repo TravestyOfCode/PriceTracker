@@ -50,7 +50,7 @@ public class UpdatePriceHistoryTests : IAsyncLifetime, IClassFixture<BaseTestFix
     public async Task Update_With_Valid_Values_Is_Possible()
     {
         // Arrange
-        var command = new UpdatePriceHistory() { Id = priceHistories[0].Id, ProductId = products[1].Id, UnitOfMeasureId = uoms[1].Id, Quantity = 10, Price = .59m, Date = DateTime.Now.AddDays(-15) };
+        var command = new UpdatePriceHistory() { Id = priceHistories[0].Id, ProductId = products[1].Id, UnitOfMeasureId = uoms[1].Id, Quantity = 10, Price = .59m, Date = DateTime.Now.AddDays(-15).Date };
 
         // Act
         var result = await _fixture.SendAsync(command);
@@ -63,6 +63,14 @@ public class UpdatePriceHistoryTests : IAsyncLifetime, IClassFixture<BaseTestFix
         result.Value.Quantity.Should().Be(command.Quantity);
         result.Value.Price.Should().Be(command.Price);
         result.Value.Date.Should().Be(command.Date);
+
+        var entity = await _fixture.FindAsync<Data.Entity.PriceHistory>(command.Id);
+        entity.Should().NotBeNull();
+        entity.ProductId.Should().Be(command.ProductId);
+        entity.UnitOfMeasureId.Should().Be(command.UnitOfMeasureId);
+        entity.Quantity.Should().Be(command.Quantity);
+        entity.Price.Should().Be(command.Price);
+        entity.Date.Should().Be(command.Date);
     }
 
     [Fact]
