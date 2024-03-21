@@ -1,0 +1,49 @@
+﻿@model PriceTracker.Web.Models.UnitOfMeasure.IndexViewModel
+
+@{
+    ViewData["Title"] = "Unit of Measures";
+    var command = new PriceTracker.Data.UnitOfMeasure.Commands.CreateUnitOfMeasure();
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <caption class="caption-top"><button type="button" class="btn btn-primary float-end" onclick="document.getElementById('create-modal').showModal()">Create New</button></caption>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Abbreviation</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="uom-list">
+        <partial name="IndexBody" for="@Model.UnitOfMeasureList" />
+    </tbody>
+</table>
+
+<dialog id="create-modal" class="w-50">
+    <partial name="CreateModal" for="@Model.Request" />
+</dialog>
+
+
+@section Scripts {
+    <script src="~/lib/htmx.org/dist/htmx.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function cancelDialog() {
+            var dialog = document.getElementById("create-modal");
+            var inputs = dialog.querySelectorAll("input");
+            var spans = dialog.querySelectorAll("span");
+
+            for (let i = 0; i < inputs.length; i++) {
+                inputs[i].value = "";
+            }
+
+            for (let i = 0; i < spans.length; i++) {
+                spans[i].innerText = "";
+            }
+
+            dialog.close();
+        }
+    </script>
+}

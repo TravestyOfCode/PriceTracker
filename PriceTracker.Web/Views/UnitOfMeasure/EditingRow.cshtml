@@ -1,0 +1,9 @@
+﻿@model PriceTracker.Data.UnitOfMeasure.UnitOfMeasureModel
+
+<td><input asp-for="Name" class="form-control" /><span class="text-danger" asp-validation-for="Name"></span></td>
+<td><input asp-for="Abbreviation" class="form-control" /><span class="text-danger" asp-validation-for="Abbreviation"></span></td>
+<td>
+    <input type="hidden" asp-for="Id" />
+    <button type="button" class="btn btn-secondary" hx-get="/UnitOfMeasure/CancelEditRow?id=@Model.Id" hx-target="#uom-@Model.Id">Cancel</button>
+    <button type="button" class="btn btn-success" hx-post="/UnitOfMeasure/EditRow" hx-target="#uom-@Model.Id" hx-include="closest tr">Save</button>
+</td>
