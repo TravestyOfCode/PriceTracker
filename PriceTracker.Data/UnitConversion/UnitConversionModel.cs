@@ -4,6 +4,8 @@ namespace PriceTracker.Data.UnitConversion;
 
 public class UnitConversionModel
 {
+    public int Id { get; set; }
+
     public int SourceUnitOfMeasureId { get; set; }
 
     public UnitOfMeasureModel SourceUnitOfMeasure { get; set; }
