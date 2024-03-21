@@ -37,6 +37,7 @@ internal static class UnitOfMeasureExtensions
     {
         return entity == null ? null : new UnitOfMeasureModel()
         {
+            Id = entity.Id,
             Name = entity.Name,
             Abbreviation = entity.Abbreviation
         };

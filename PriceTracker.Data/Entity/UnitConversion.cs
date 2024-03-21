@@ -54,6 +54,7 @@ internal static class UnitConversionExtensions
     {
         return entity == null ? null : new UnitConversionModel()
         {
+            Id = entity.Id,
             SourceUnitOfMeasureId = entity.SourceUnitOfMeasureId,
             SourceUnitOfMeasure = entity.SourceUnitOfMeasure.AsModel(),
             DestinationUnitOfMeasureId = entity.DestinationUnitOfMeasureId,
