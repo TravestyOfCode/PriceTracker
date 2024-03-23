@@ -1,0 +1,7 @@
+﻿@model PriceTracker.Data.Store.StoreModel
+
+<td>@Model.Name</td>
+<td>
+    <button type="button" class="btn btn-primary" hx-get="/Store/EditRow?id=@Model.Id" hx-target="#store-@Model.Id">Edit</button>
+    <button type="button" class="btn btn-danger" hx-delete="/Store/DeleteRow?id=@Model.Id" hx-target="#store-@Model.Id" hx-swap="outerHTML" hx-confirm="Are you sure you want to delete this Store?@($"\n {Model.Name}")">Delete</button>
+</td>

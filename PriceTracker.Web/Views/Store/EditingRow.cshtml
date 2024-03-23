@@ -1,0 +1,8 @@
+﻿@model PriceTracker.Data.Store.StoreModel
+
+<td><input asp-for="Name" class="form-control" /><span class="text-danger" asp-validation-for="Name"></span></td>
+<td>
+    <input type="hidden" asp-for="Id" />
+    <button type="button" class="btn btn-secondary" hx-get="/Store/CancelEditRow?id=@Model.Id" hx-target="#store-@Model.Id">Cancel</button>
+    <button type="button" class="btn btn-success" hx-post="/Store/EditRow" hx-target="#store-@Model.Id" hx-include="closest tr">Save</button>
+</td>
