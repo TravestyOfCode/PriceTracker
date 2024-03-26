@@ -16,7 +16,7 @@ public interface IPagedQuery
 
 public static class IPagedQueryExtensions
 {
-    public static IQueryable<T> AsPagedQuery<T>(IQueryable<T> query, IPagedQuery pagedQuery)
+    public static IQueryable<T> AsPagedQuery<T>(this IQueryable<T> query, IPagedQuery pagedQuery)
     {
         if (query == null || pagedQuery == null)
         {
