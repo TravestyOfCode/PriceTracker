@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PriceTracker.Data\PriceTracker.Data.csproj" />
+    <ProjectReference Include="..\PriceTracker.Web\PriceTracker.Web.csproj" />
   </ItemGroup>
 
 </Project>
