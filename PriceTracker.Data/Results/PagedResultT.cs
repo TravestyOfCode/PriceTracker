@@ -3,7 +3,7 @@ using System.Net;
 
 namespace PriceTracker.Data.Results;
 
-public class PagedResult<T> : Result<List<T>>, IPagedQuery
+public class PagedResult<T> : Result<List<T>>, IPagedQuery, IPagedResult
 {
     public new List<T> Value { get; internal set; }
 
@@ -19,6 +19,7 @@ public class PagedResult<T> : Result<List<T>>, IPagedQuery
 
     public PagedResult(HttpStatusCode statusCode, List<T> value = default) : base(statusCode, value)
     {
+        Value = value;
     }
 
     public static PagedResult<T> Ok(List<T> value, IPagedQuery query, double totalCount)
