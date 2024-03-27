@@ -50,6 +50,9 @@ internal class UpdateProductHandler : IRequestHandler<UpdateProduct, Result<Prod
 
             await _dbContext.SaveChangesAsync(cancellationToken);
 
+            // Load the reference in case the UoM changed.
+            await _dbContext.Entry(entity).Reference(p => p.DefaultUnitOfMeasure).LoadAsync(cancellationToken);
+
             return Result.Ok(entity.AsModel());
         }
         catch (Exception ex)

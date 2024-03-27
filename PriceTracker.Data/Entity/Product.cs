@@ -65,12 +65,12 @@ internal static class ProductExtensions
                 Id = p.Id,
                 Name = p.Name,
                 DefaultUnitOfMeasureId = p.DefaultUnitOfMeasureId,
-                DefaultUnitOfMeasure = new UnitOfMeasureModel()
+                DefaultUnitOfMeasure = p.DefaultUnitOfMeasure != null ? new UnitOfMeasureModel()
                 {
                     Id = p.DefaultUnitOfMeasure.Id,
                     Name = p.DefaultUnitOfMeasure.Name,
                     Abbreviation = p.DefaultUnitOfMeasure.Abbreviation
-                }
+                } : null
             });
         }
 
