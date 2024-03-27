@@ -1,0 +1,15 @@
+﻿@model PriceTracker.Web.Models.Product.EditingViewModel
+
+@{
+    var UoMSelectList = new SelectList(Model.UnitOfMeasures, "Id", "Name", Model.DefaultUnitOfMeasureId);
+}
+
+<td><input asp-for="Name" class="form-control" /><span class="text-danger" asp-validation-for="Name"></span></td>
+<td><select asp-for="DefaultUnitOfMeasureId" class="form-select" asp-items="UoMSelectList">
+    <option value=""></option>
+</select></td>
+<td>
+    <input type="hidden" asp-for="Id" />
+    <button type="button" class="btn btn-secondary" hx-get="/Product/CancelEditRow?id=@Model.Id" hx-target="#product-@Model.Id">Cancel</button>
+    <button type="button" class="btn btn-success" hx-post="/Product/EditRow" hx-target="#product-@Model.Id" hx-include="closest tr">Save</button>
+</td>

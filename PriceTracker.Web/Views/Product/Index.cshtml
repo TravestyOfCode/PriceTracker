@@ -1,0 +1,51 @@
+﻿@model PriceTracker.Web.Models.Product.IndexViewModel
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <caption class="caption-top"><button type="button" class="btn btn-primary float-end" onclick="document.getElementById('create-modal').showModal()">Create New</button></caption>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Default Unit Of Measure</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="product-list">
+        <partial name="IndexBody" for="@Model.ProductList" />
+    </tbody>
+</table>
+
+<div id="page-nav">
+    <partial name="PageNavigation" for="@Model" />
+</div>
+
+<dialog id="create-modal" class="w-50">
+    <partial name="CreateModal" for="@Model.Request" />
+</dialog>
+
+@section Scripts {
+    <script src="~/lib/htmx.org/dist/htmx.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function cancelDialog() {
+            var dialog = document.getElementById("create-modal");
+            var inputs = dialog.querySelectorAll("input");
+            var spans = dialog.querySelectorAll("span");
+
+            for (let i = 0; i < inputs.length; i++) {
+                inputs[i].value = "";
+            }
+
+            for (let i = 0; i < spans.length; i++) {
+                spans[i].innerText = "";
+            }
+
+            dialog.close();
+        }
+    </script>
+}

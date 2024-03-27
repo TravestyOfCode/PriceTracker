@@ -1,0 +1,35 @@
+﻿@model PriceTracker.Web.Models.Product.CreateModalViewModel
+
+@{
+    var uomSelectList = new SelectList(Model.UnitOfMeasures, "Key", "Value.Name", Model.DefaultUnitOfMeasureId);
+}
+
+
+<div class="modal-header mb-3 fs-2">Create New Product</div>
+<div class="modal-body">
+    <form id="create-form">
+        <div class="text-danger" asp-validation-summary="All"></div>
+        <div class="row mb-3">
+            <label asp-for="Name" class="col-sm-4 col-md-3 col-lg-2 col-form-label"></label>
+            <div class="col-sm-8 col-md-9 col-lg-10">
+                <input asp-for="Name" class="form-control" />
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label asp-for="DefaultUnitOfMeasureId" class="col-sm-4 col-md-3 col-lg-2 col-form-label"></label>
+            <div class="col-sm-8 col-md-9 col-lg-10">
+                <select asp-for="DefaultUnitOfMeasureId" class="form-control" asp-items="uomSelectList">
+                    <option value=""></option>
+                </select>
+                <span class="text-danger" asp-validation-for="DefaultUnitOfMeasureId"></span>
+            </div>
+        </div>
+
+        <div class="float-end">
+            <button type="button" class="btn btn-secondary" id="create-modal-cancel" onclick="cancelDialog()">Cancel</button>
+            <button type="button" class="btn btn-success" hx-post="/Product/Index" hx-target="#product-list">Create</button>
+        </div>
+    </form>
+</div>

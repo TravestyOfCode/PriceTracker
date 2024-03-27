@@ -1,0 +1,8 @@
+﻿@model IEnumerable<PriceTracker.Data.Product.ProductModel>
+
+@foreach (var product in Model)
+{
+    <tr id="product-@product.Id">
+        <partial name="EditableRow" for="@product" />
+    </tr>
+}
