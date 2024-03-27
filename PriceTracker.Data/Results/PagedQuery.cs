@@ -2,9 +2,20 @@
 
 public abstract class PagedQuery<T> : IRequest<PagedResult<T>>, IPagedQuery
 {
-    public int Page { get; set; }
+    private int _Page = 1;
+    public int Page
+    {
+        get => _Page;
+        set => _Page = value > 0 ? value : throw new ArgumentOutOfRangeException(nameof(Page));
+    }
 
-    public int PerPage { get; set; }
+    private int _PerPage = 10;
+    public int PerPage
+    {
+        get => _PerPage;
+        set => _PerPage = value > 0 ? value : throw new ArgumentOutOfRangeException(nameof(PerPage));
+
+    }
 
     public string SortBy { get; set; }
 
