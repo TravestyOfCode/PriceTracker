@@ -67,6 +67,7 @@ internal static class UnitConversionExtensions
     {
         return query?.Select(p => new UnitConversionModel()
         {
+            Id = p.Id,
             SourceUnitOfMeasureId = p.SourceUnitOfMeasureId,
             SourceUnitOfMeasure = new Data.UnitOfMeasure.UnitOfMeasureModel()
             {

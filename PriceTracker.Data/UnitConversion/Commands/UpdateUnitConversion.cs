@@ -31,8 +31,6 @@ internal class UpdateUnitConversionHandler : IRequestHandler<UpdateUnitConversio
         try
         {
             var entity = await _dbContext.UnitConversions
-                .Include(p => p.SourceUnitOfMeasure)
-                .Include(p => p.DestinationUnitOfMeasure)
                 .AsTracking()
                 .SingleOrDefaultAsync(p => p.Id.Equals(request.Id), cancellationToken);
 
@@ -48,6 +46,8 @@ internal class UpdateUnitConversionHandler : IRequestHandler<UpdateUnitConversio
             await _dbContext.SaveChangesAsync(cancellationToken);
 
             // Do we need to refresh the entity details?
+            _dbContext.Entry(entity).Reference(p => p.SourceUnitOfMeasure).Load();
+            _dbContext.Entry(entity).Reference(p => p.DestinationUnitOfMeasure).Load();
 
             return Result.Ok(entity.AsModel());
 
