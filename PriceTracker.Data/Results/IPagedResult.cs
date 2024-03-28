@@ -1,6 +1,6 @@
 ﻿namespace PriceTracker.Data.Results;
 
-public enum SortOrder { ASC, DESC }
+public enum SortOrder { NONE, ASC, DESC }
 
 public interface IPagedResult : IPagedQuery
 {
