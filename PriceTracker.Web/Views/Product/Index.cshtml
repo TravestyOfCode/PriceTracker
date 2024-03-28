@@ -1,7 +1,11 @@
-﻿@model PriceTracker.Web.Models.Product.IndexViewModel
+﻿@using PriceTracker.Data.Results;
+@model PriceTracker.Web.Models.Product.IndexViewModel
 
 @{
     ViewData["Title"] = "Products";
+    // Need to create vars for string property name as partial for doesn't seem to like string literals
+    var name = nameof(Model.Request.Name);
+    var defaultUoM = nameof(Model.Request.DefaultUnitOfMeasureId);    
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -10,8 +14,8 @@
     <caption class="caption-top"><button type="button" class="btn btn-primary float-end" onclick="document.getElementById('create-modal').showModal()">Create New</button></caption>
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Default Unit Of Measure</th>
+            <partial name="SortableHeader" for="@name" />
+            <partial name="SortableHeader" for="@defaultUoM" />
             <th>Actions</th>
         </tr>
     </thead>
@@ -49,3 +53,4 @@
         }
     </script>
 }
+
