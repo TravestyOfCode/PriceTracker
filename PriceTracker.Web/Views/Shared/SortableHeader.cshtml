@@ -1,10 +1,10 @@
 ﻿@model string
 
 @{
-    var currPage = ViewContext.ModelState["Page"].AttemptedValue;
-    var perPage = ViewContext.ModelState["PerPage"].AttemptedValue;
-    var sortBy = ViewContext.ModelState["SortBy"].AttemptedValue;
-    var sortOrder = ViewContext.ModelState["sortOrder"].AttemptedValue;
+    var currPage = ViewContext.ModelState["Page"]?.AttemptedValue;
+    var perPage = ViewContext.ModelState["PerPage"]?.AttemptedValue;
+    var sortBy = ViewContext.ModelState["SortBy"]?.AttemptedValue;
+    var sortOrder = ViewContext.ModelState["sortOrder"]?.AttemptedValue;
 
     sortOrder = sortBy != @Model ? "NONE" : (sortOrder == "ASC" ? "ASC" : "DESC");
 
