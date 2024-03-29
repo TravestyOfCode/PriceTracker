@@ -198,6 +198,34 @@ public class ProductController : Controller
         }
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Search(GetProductsByNameContains request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(request.Name))
+            {
+                Response.Headers.HXRefresh();
+                return Ok();
+            }
+
+            var result = await _mediator.Send(request, cancellationToken);
+
+            if (result.WasSuccess)
+            {
+                return PartialView("IndexBody", result.Value);
+            }
+
+            return StatusCode((int)result.StatusCode);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Unexpected error.");
+
+            return StatusCode(500);
+        }
+    }
+
     public async Task<Result<EditingViewModel>> GetProductAsEditable(int id, CancellationToken cancellationToken)
     {
         try
@@ -231,4 +259,5 @@ public class ProductController : Controller
             return Result.ServerError<EditingViewModel>();
         }
     }
+
 }

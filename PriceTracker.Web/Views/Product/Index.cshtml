@@ -10,8 +10,14 @@
 
 <h1>@ViewData["Title"]</h1>
 
+
+
+
 <table class="table">
-    <caption class="caption-top"><button type="button" class="btn btn-primary float-end" onclick="document.getElementById('create-modal').showModal()">Create New</button></caption>
+    <caption class="caption-top">
+        <input type="text" id="product-search" name="Name"
+               hx-get="/Product/Search" hx-target="#product-list" hx-trigger="input changed delay:500ms, search" />
+        <button type="button" class="btn btn-primary float-end" onclick="document.getElementById('create-modal').showModal()">Create New</button></caption>
     <thead>
         <tr>
             <partial name="SortableHeader" for="@name" />
